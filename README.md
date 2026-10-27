@@ -11,7 +11,7 @@ QQ / 微信**多端互通中枢**插件（DeepSeek Harness / Cordis bundle）。
 ## 5 分钟上手
 
 1. 前提：你已经有 QQ 桥（SnowLuma/OneBot，日志在 `~/qq-bridge/state/`）与微信 hook（WeChatAgent）。本插件**不自己连 IM**，只做汇聚、观测与闸门
-2. `dsh plugin --profile <profile> add github:<owner>/dsh-fish-hub`（本地开发用 `file:` 路径），重启宿主
+2. `dsh plugin --profile <profile> add github:minrose-314/dsh-fish-hub`（本地开发用 `file:` 路径），重启宿主
 3. `cp targets.example.json data/targets.json` 填你自己的会话 id（详见「本地化配置」）
 4. 开 http://127.0.0.1:3212 ——账本开屏即录，四个健康灯即点即亮
 
@@ -101,7 +101,7 @@ index.mjs          分层容错装配（任一层坏不拖垮其余）
 - [x] token/密钥零硬编码（扫描确认；运行时读取）
 - [x] `data/`、`backups/`、`audit.log` 由 `.gitignore` 与 `files[]` 双重排除
 - [x] 控制台保存/重启按钮改 `data-save`/`data-rst` 事件委托（引号吞转义问题根除）
-- [ ] README/package.json 的 `<owner>` 占位换真实仓库地址（建库时填）
+- [ ] README/package.json 的 `minrose-314` 占位换真实仓库地址（建库时填）
 
 ## 社区
 

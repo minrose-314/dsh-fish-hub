@@ -37,12 +37,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<owner>/dsh-fish-hub.git"
+    "url": "git+https://github.com/minrose-314/dsh-fish-hub.git"
   },
   "bugs": {
-    "url": "https://github.com/<owner>/dsh-fish-hub/issues"
+    "url": "https://github.com/minrose-314/dsh-fish-hub/issues"
   },
-  "homepage": "https://github.com/<owner>/dsh-fish-hub#readme",
+  "homepage": "https://github.com/minrose-314/dsh-fish-hub#readme",
   "dsh": {
     "manifestVersion": 1,
     "bundle": {

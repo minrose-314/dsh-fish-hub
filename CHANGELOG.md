@@ -23,4 +23,4 @@
 - 换代链 `POST /api/restart` 缺 `Content-Type` 被 415 拒绝
 - 桥票据过期：换代链末尾自动带桥重启换票
 
-[0.1.0]: https://github.com/<owner>/dsh-fish-hub/releases/tag/v0.1.0
+[0.1.0]: https://github.com/minrose-314/dsh-fish-hub/releases/tag/v0.1.0
