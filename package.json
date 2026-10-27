@@ -1,0 +1,54 @@
+{
+  "name": "dsh-fish-hub",
+  "version": "0.1.0",
+  "description": "QQ/微信多端互通中枢插件：把两条 IM 桥的消息历史合并进同一 SQLite 事件账本，提供跨端近况查询工具与五合一本地总控台（账本 / 通道配置 / 插件装卸 / 审计），端口漂移自适应",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "cordis",
+    "onebot",
+    "qq",
+    "wechat",
+    "message-ledger",
+    "console"
+  ],
+  "type": "module",
+  "main": "index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.mjs",
+    "soul",
+    "bridge",
+    "hub",
+    "ops",
+    "cordis.patch.yml",
+    "targets.example.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<owner>/dsh-fish-hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/<owner>/dsh-fish-hub/issues"
+  },
+  "homepage": "https://github.com/<owner>/dsh-fish-hub#readme",
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.4"
+  },
+  "engines": {
+    "node": ">=22",
+    "dsh": ">=0.2.0-rc.2"
+  }
+}

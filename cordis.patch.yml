@@ -1,0 +1,82 @@
+# dsh-fish-hub —— 小鱼大插件的 bundle 声明。
+# 三合一：soul（能力路由，config 整体从 dsh-fish-soul 迁来）+ bridge（微信直发）+ hub（账本与总控台）。
+# 换代挂载本插件后，旧的两条（fish-soul bundles 项、顶层 fish-bridge）应停用，避免双挂。
+
+- insert:
+    - id: fish-hub
+      name: 'dsh-fish-hub'
+      config:
+        hub:
+          port: 3212
+        soul:
+          enabled: true
+          dataDir: ''
+          channels:
+            - channel: desktop
+              match:
+                cwd:
+                  - "C:/Users/y'q/Documents/deepseek-harness"
+              trust: admin
+              resident: ['persona-memory', 'im-wechat', 'cord-selfcheck', 'fish-hub-console']
+              description: 桌面宿主（爸直接跟我说话的地方）
+            - channel: qq
+              match:
+                cwd:
+                  - "C:/Users/y'q/qq-bridge"
+                  - "D:/小鱼/state/agents"
+              trust: group
+              privateTrust: private
+              resident: ['persona-memory']
+              description: QQ 通道（SnowLuma 桥；群会话默认群信任，私聊升 private）
+            - channel: wechat-social
+              match:
+                cwd:
+                  - "D:/WeChatAgent"
+              trust: group
+              privateTrust: private
+              resident: ['persona-memory']
+              description: 微信通道（WeChatAgent 桥；群友判断会话按群信任）
+            - channel: unknown
+              trust: unknown
+              resident: ['persona-memory']
+              description: 兜底——认不出来的会话按最低信任处理
+          riskOrder: ['read', 'external-write', 'exec', 'admin']
+          declarations:
+            - plugin: dsh-fish-hub
+              version: 0.1.0
+              capabilities:
+                - name: im-wechat
+                  purpose: 小鱼的微信直发/通道体检/近况回读
+                  whenToUse: 要主动给爸发微信、查微信通道健康、读微信最近聊了啥
+                  whenNotToUse: 微信收消息（桥自动处理，不需要工具）
+                  risk: external-write
+                  cost: { context: low, latency: low, money: none }
+                  entrypoints: ['fish_wechat_send', 'fish_wechat_status', 'fish_wechat_history']
+                - name: fish-hub-console
+                  purpose: 多端统一账本（QQ+微信消息同屏）与跨端近况查询
+                  whenToUse: 爸问“另一边/群里刚才说了啥”、要跨端回顾、查哪条通道不对劲
+                  whenNotToUse: 发东西（那是 im-wechat 的事）；配置改动只在网页控制台，不在这
+                  risk: read
+                  cost: { context: low, latency: low, money: none }
+                  entrypoints: ['fish_hub_events', 'fish_hub_state']
+            - plugin: dsh-internal-tools
+              version: host
+              capabilities:
+                - name: cord-selfcheck
+                  purpose: Cordis 运行时自检（服务/事件/配置/工具面查询）
+                  whenToUse: 排查插件挂载、配置生效、工具契约这类宿主层问题
+                  whenNotToUse: 日常聊天；群会话（需显式 load 且仅限私聊以上）
+                  risk: read
+                  cost: { context: medium, latency: low, money: none }
+                  entrypoints: ['cordis_inspect_list', 'cordis_inspect_query']
+            - plugin: feiyu-memory
+              version: host
+              capabilities:
+                - name: persona-memory
+                  purpose: 人格内核 + 跨会话日记（所有通道共享同一档案）
+                  whenToUse: 常驻——这是"我是谁"本身，不参与装卸决策
+                  whenNotToUse: 永不卸载
+                  risk: external-write
+                  cost: { context: medium, latency: low, money: low }
+                  entrypoints: ['feiyu_note']
+          protect: ['persona-memory', 'qq-social-guard', 'wechat-social-guard']

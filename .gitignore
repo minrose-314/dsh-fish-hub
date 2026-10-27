@@ -1,0 +1,6 @@
+# 隐私红线：这三样永远不进 git
+data/
+backups/
+audit.log
+*.bak
+node_modules/
