@@ -6,7 +6,7 @@ QQ / 微信**多端互通中枢**插件（DeepSeek Harness / Cordis bundle）。
 
 > 定位说明：这是一个**个人自动化流水线的"家用电器"**——它不自带 IM 连接能力，消息收发仍由外部桥完成；本插件做的是**汇聚、观测、配置与闸门**。
 
-**MIT · dsh ≥0.2.0-rc.2 · node ≥22 · Windows-first（ops 脚本为 PowerShell）**
+**MIT · dsh ≥0.2.0-rc.2 · node ≥22 · Windows-first（ops 脚本为 PowerShell）· CI 全绿才见 main**
 
 ## 5 分钟上手
 

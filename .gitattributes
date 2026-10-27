@@ -1,0 +1,8 @@
+# 统一换行：仓库内存 LF（Linux CI/协作者友好），检出行为交给 git 自己管
+* text=auto
+*.mjs text eol=lf
+*.js text eol=lf
+*.yml text eol=lf
+*.ps1 text
+*.md text
+*.json text eol=lf
