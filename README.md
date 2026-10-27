@@ -88,8 +88,9 @@ index.mjs          分层容错装配（任一层坏不拖垮其余）
 1. `soul`/`bridge` 层的工具面偏个人向，未提供配置向导（微信目标已改 `data/targets.json` 配置化）
 2. 账本对 QQ **出站消息只记到"成功 N/M 条"**，正文未入库（桥日志形态所限）
 
-## 本地化配置（二次分发三步走）
+## 本地化配置（二次分发四步走）
 
+0. **出厂 `cordis.patch.yml` 中的挂载路径（workspace、agent 目录等）是原作者环境的示例值**——直接安装会挂到不存在的路径。装前把 `C:/Users/...`、`D:/...` 换成你自己的目录（这些路径不能泛化成占位符，因为同一文件在作者本机是真实挂载锚点，此为工程取舍）
 1. `cp targets.example.json data/targets.json` 并填自己的 onebot 会话 id（`data/` 不进包）
 2. 微信数据根目录：环境变量 `FISH_HUB_WX_ROOT`（账本侧）/ `FISH_BRIDGE_WX_ROOT`（发送侧），默认 `D:/WeChatAgent/data/workspace`
 3. QQ 桥固定在 `~/qq-bridge/`；不同路径可用 `FISH_WX_TARGETS_FILE` 指定 targets 文件位置
@@ -101,7 +102,12 @@ index.mjs          分层容错装配（任一层坏不拖垮其余）
 - [x] token/密钥零硬编码（扫描确认；运行时读取）
 - [x] `data/`、`backups/`、`audit.log` 由 `.gitignore` 与 `files[]` 双重排除
 - [x] 控制台保存/重启按钮改 `data-save`/`data-rst` 事件委托（引号吞转义问题根除）
-- [ ] README/package.json 的 `minrose-314` 占位换真实仓库地址（建库时填）
+- [x] README/package.json 仓库地址已落定（v0.1.0 发布时）
+- [x] 全历史扫描（含每个 commit）：无聊天数据、无 token 值、无真实会话 id；仅保留作者用户名形态的示例挂载路径，已在上方第 0 步如实声明
+
+## 声明
+
+本项目与腾讯（QQ/微信）、DeepSeek 无隶属或赞助关系，商标名仅作兼容性指代（nominative use）。本仓库**不包含也不分发**任何 IM 客户端、hook 或桥接组件本体；微信/QQ 自动化组件的存在性与账号风险由使用者自行评估，遵守所在平台条款的责任同样在使用者。
 
 ## 社区
 
