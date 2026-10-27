@@ -2,9 +2,20 @@
 
 QQ / 微信**多端互通中枢**插件（DeepSeek Harness / Cordis bundle）。
 
-把两条独立 IM 桥（QQ：SnowLuma OneBot 桥；微信：WeChatAgent hook）的消息历史合并进**同一个 SQLite 事件账本**，让 Agent 在任意一端都能查另一端"刚才说了什么"；并提供一个五合一本地总控台（`:3212`）作为唯一管理入口。
+把两条独立 IM 桥（QQ：SnowLuma OneBot 桥；微信：WeChatAgent hook）的消息历史合并进**同一个追加式事件账本（JSONL，人眼可审、grep 可查）**，让 Agent 在任意一端都能查另一端"刚才说了什么"；并提供一个五合一本地总控台（`:3212`）作为唯一管理入口。
 
 > 定位说明：这是一个**个人自动化流水线的"家用电器"**——它不自带 IM 连接能力，消息收发仍由外部桥完成；本插件做的是**汇聚、观测、配置与闸门**。
+
+**MIT · dsh ≥0.2.0-rc.2 · node ≥22 · Windows-first（ops 脚本为 PowerShell）**
+
+## 5 分钟上手
+
+1. 前提：你已经有 QQ 桥（SnowLuma/OneBot，日志在 `~/qq-bridge/state/`）与微信 hook（WeChatAgent）。本插件**不自己连 IM**，只做汇聚、观测与闸门
+2. `dsh plugin --profile <profile> add github:<owner>/dsh-fish-hub`（本地开发用 `file:` 路径），重启宿主
+3. `cp targets.example.json data/targets.json` 填你自己的会话 id（详见「本地化配置」）
+4. 开 http://127.0.0.1:3212 ——账本开屏即录，四个健康灯即点即亮
+
+> 📸 截图区（发版前补三张）：账本同屏 / 通道配置页 / 插件装卸闸门
 
 ## 它解决什么问题
 
@@ -15,7 +26,7 @@ QQ / 微信**多端互通中枢**插件（DeepSeek Harness / Cordis bundle）。
 ## 功能清单
 
 ### 1. 统一事件账本
-- 增量解析 `qq-bridge/state/bridge.log` 与 `WeChatAgent .../hook.log` 进同一张 `events` 表（SQLite）
+- 增量解析 `qq-bridge/state/bridge.log` 与 `WeChatAgent .../hook.log` 进同一 `data/events.jsonl`（追加式，带游标断点续读）
 - 字段：时间 / 通道(qq·wechat·op) / 方向(in·out) / 会话 / 发送者 / 正文 / 消息 ID
 - 操作记录（op）单独成流：谁在什么时候改了哪个配置、重启了哪座桥，都进账本可回放
 
