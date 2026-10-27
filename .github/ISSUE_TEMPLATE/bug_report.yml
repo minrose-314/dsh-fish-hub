@@ -1,0 +1,30 @@
+name: Bug 报告
+description: 报告一个真实环境里的问题（先跑 npm run check && npm run check:ui 排除低级错误）
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: 现象
+      description: 你点了什么 / 调了什么，看到了什么（浏览器僵死请把 Console 首行红字带上）
+    validations: { required: true }
+  - type: textarea
+    id: env
+    attributes:
+      label: 环境
+      description: OS、dsh 版本、node 版本、QQ 桥/WeChatAgent 是否装了对应组件
+    validations: { required: true }
+  - type: textarea
+    id: logs
+    attributes:
+      label: 相关日志
+      description: ~/.dsh/fish-hub-diag.log 尾部、桥日志相关段（**先抹掉 token 和真实会话 id 再贴**）
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 预检
+      options:
+        - label: npm run check 本地通过
+          required: true
+        - label: npm run check:ui 本地通过
+          required: true

@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  static:
+    name: 语法与页面形态闸门（不依赖任何外部桥）
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.x, 24.x]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: 全部 JS 语法
+        run: node scripts/check.mjs
+      - name: 总控台页面（求值后形态 + 回归断言）
+        run: node scripts/check-ui.mjs
+      - name: 密钥与个人信息粗筛
+        run: |
+          ! grep -rInE "sk-[A-Za-z0-9._-]{20,}|op_[A-Za-z0-9]{16,}" \
+            --include="*.mjs" --include="*.js" --include="*.json" \
+            --include="*.yml" --include="*.md" --include="*.ps1" . \
+            || (echo "发现疑似密钥字面量"; exit 1)

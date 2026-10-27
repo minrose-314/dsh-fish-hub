@@ -14,6 +14,10 @@
   ],
   "type": "module",
   "main": "index.mjs",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "check:ui": "node scripts/check-ui.mjs"
+  },
   "exports": {
     ".": "./index.mjs",
     "./package.json": "./package.json"
@@ -24,6 +28,7 @@
     "bridge",
     "hub",
     "ops",
+    "scripts",
     "cordis.patch.yml",
     "targets.example.json",
     "README.md",

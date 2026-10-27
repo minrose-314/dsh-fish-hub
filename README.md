@@ -103,6 +103,15 @@ index.mjs          分层容错装配（任一层坏不拖垮其余）
 - [x] 控制台保存/重启按钮改 `data-save`/`data-rst` 事件委托（引号吞转义问题根除）
 - [ ] README/package.json 的 `<owner>` 占位换真实仓库地址（建库时填）
 
+## 社区
+
+| 文件 | 内容 |
+|---|---|
+| [CHANGELOG.md](CHANGELOG.md) | Keep a Changelog 格式的版本史 |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | 开发回路 + 本项目用两次线上僵死换来的验收纪律 |
+| [SECURITY.md](SECURITY.md) | 运行边界与设计权衡 |
+| `.github/` | Issue/PR 模板 与 CI（纯静态闸门：`npm run check && npm run check:ui`，不依赖外部桥，任何 runner 都能跑绿） |
+
 ## License
 
 MIT
